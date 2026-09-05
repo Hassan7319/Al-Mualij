@@ -379,7 +379,7 @@
 
     <!-- ====================================================================
          SCREEN 4: APPOINTMENT / CLINICAL INTAKE WEBFORM
-         Collects the 17 specified fields with strict validation & n8n / Firestore POST
+         Collects the 17 specified fields with strict validation and secure record storage
          ==================================================================== -->
     <section id="screen-4" class="screen">
       <div class="form-screen-wrap">
@@ -763,33 +763,6 @@
 
   <!-- Toast Notification Container -->
   <div id="toastContainer" class="toast-container" aria-live="polite"></div>
-
-  <!-- ====================================================================
-       DEVELOPER & INTEGRATION DRAWER
-       Allows instant live configuration & testing of n8n Webhook & Firebase
-       ==================================================================== -->
-  <button id="devDrawerToggleBtn" class="dev-drawer-toggle" type="button" title="Integration Settings">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-    <span>Integration Config</span>
-  </button>
-
-  <div id="devDrawer" class="dev-drawer" role="dialog" aria-label="Integration Settings">
-    <h4>
-      <span>Backend & Webhook Config</span>
-      <button id="devDrawerCloseBtn" class="close-btn" type="button">&times;</button>
-    </h4>
-    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
-      Test your n8n workflow or Firebase connection in real-time.
-    </p>
-    <div class="form-group" style="margin-bottom: 0.75rem;">
-      <label class="form-label" for="devWebhookUrlInput" style="font-size: 0.8rem;">n8n Webhook URL (POST)</label>
-      <input type="url" id="devWebhookUrlInput" class="form-control" placeholder="https://your-n8n.instance/webhook/..." style="font-size: 0.82rem;" />
-    </div>
-    <div style="display: flex; gap: 0.5rem;">
-      <button id="saveDevWebhookBtn" class="btn btn-primary btn-sm" style="flex: 1;" type="button">Save Webhook</button>
-      <button class="btn btn-secondary btn-sm" onclick="window.open('https://n8n.io', '_blank')" type="button">n8n Docs</button>
-    </div>
-  </div>
 
   <!-- Firebase Compat SDK (Ready for live keys insertion) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>

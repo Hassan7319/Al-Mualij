@@ -4,9 +4,6 @@
    Background Blur, Scroll Lock & Responsive Layout
    ========================================================================== */
 
-// --- Global Configuration ---
-let WEBHOOK_URL = "https://white7319.app.n8n.cloud/webhook-test/bec6264f-d14f-4efb-ba09-5a06a06f202f";
-
 // 16 Form Fields Schema
 const INPUT_FIELDS_JSON = [
   { "id": "mrNumber", "label": "MR #", "type": "text", "required": true },
@@ -61,7 +58,6 @@ function initApp() {
   setupAuthListeners();
   setupAppointmentFormListeners();
   setupChatbotGuide();
-  setupDevDrawer();
 
   // 5. Initialize Cooldown state if any
   checkAndApplyCooldown();
@@ -80,14 +76,6 @@ function loadSavedState() {
   if (window.AlMualijFirebase && window.AlMualijFirebase.localStore) {
     AppState.activeUser = window.AlMualijFirebase.localStore.getCurrentUser();
     AppState.appointments = window.AlMualijFirebase.localStore.getAppointments();
-  }
-
-  // Check if webhook URL was saved in localStorage for persistence
-  const savedWebhook = localStorage.getItem("almualij_webhook_url");
-  if (savedWebhook) {
-    WEBHOOK_URL = savedWebhook;
-    const webhookInput = document.getElementById("devWebhookUrlInput");
-    if (webhookInput) webhookInput.value = savedWebhook;
   }
 
   // Sync Firebase Auth current user if already signed in
@@ -1130,29 +1118,13 @@ function setupAppointmentFormListeners() {
     `;
 
     try {
-      // 1. Dispatch POST request to n8n Webhook
-      if (isValidWebhookUrl(WEBHOOK_URL)) {
-        try {
-          await fetch(WEBHOOK_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-            },
-            body: JSON.stringify(appointmentPayload)
-          });
-        } catch (netErr) {
-          console.warn("n8n Webhook dispatch notice:", netErr);
-        }
-      }
-
-      // 2. Save record to Firebase Firestore or fallback local store
+      // Save record to Firebase Firestore or fallback local store.
       let firestoreResult = { success: true };
       if (window.AlMualijFirebase && window.AlMualijFirebase.patientService) {
         firestoreResult = await window.AlMualijFirebase.patientService.recordAppointment(appointmentPayload);
       }
 
-      // 3. Update in-memory state
+      // Update in-memory state.
       const newRecord = {
         ...appointmentPayload,
         id: firestoreResult.id || "APPT-" + Date.now().toString(36).toUpperCase(),
@@ -1161,7 +1133,7 @@ function setupAppointmentFormListeners() {
 
       AppState.appointments.unshift(newRecord);
 
-      // 4. Trigger Modal Feedback with background blur & scroll lock
+      // Trigger modal feedback with background blur and scroll lock.
       showSuccessModal(newRecord);
 
       // Reset form fields
@@ -1186,16 +1158,6 @@ function markInvalid(fieldId, message) {
   if (errorEl) {
     errorEl.textContent = message;
     errorEl.style.display = "block";
-  }
-}
-
-function isValidWebhookUrl(url) {
-  if (!url || typeof url !== "string") return false;
-  try {
-    const parsed = new URL(url);
-    return parsed.protocol === "http:" || parsed.protocol === "https:";
-  } catch (e) {
-    return false;
   }
 }
 
@@ -1301,47 +1263,6 @@ function showSuccessModal(data) {
 }
 
 /* ==========================================================================
-   DEVELOPER & INTEGRATION DRAWER
-   ========================================================================== */
-function setupDevDrawer() {
-  const toggleBtn = document.getElementById("devDrawerToggleBtn");
-  const drawer = document.getElementById("devDrawer");
-  const closeBtn = document.getElementById("devDrawerCloseBtn");
-  const saveBtn = document.getElementById("saveDevWebhookBtn");
-  const webhookInput = document.getElementById("devWebhookUrlInput");
-
-  if (toggleBtn && drawer) {
-    toggleBtn.addEventListener("click", () => {
-      drawer.classList.toggle("active");
-    });
-  }
-
-  if (closeBtn && drawer) {
-    closeBtn.addEventListener("click", () => {
-      drawer.classList.remove("active");
-    });
-  }
-
-  if (saveBtn && webhookInput) {
-    saveBtn.addEventListener("click", () => {
-      const url = webhookInput.value.trim();
-      if (!url) {
-        WEBHOOK_URL = "";
-        localStorage.removeItem("almualij_webhook_url");
-        showToast("Webhook URL cleared.", "info");
-      } else if (isValidWebhookUrl(url)) {
-        WEBHOOK_URL = url;
-        localStorage.setItem("almualij_webhook_url", url);
-        showToast("n8n Webhook URL updated successfully!", "success");
-        if (drawer) drawer.classList.remove("active");
-      } else {
-        showToast("Please provide a valid URL (http/https).", "error");
-      }
-    });
-  }
-}
-
-/* ==========================================================================
    UTILITY HELPERS
    ========================================================================== */
 function escapeHtml(string) {
@@ -1357,16 +1278,6 @@ function escapeHtml(string) {
   });
 }
 
-// Global programmatic bridge
 window.AlMualijApp = {
-  navigateTo: navigateToScreen,
-  setWebhookUrl: (url) => {
-    if (isValidWebhookUrl(url)) {
-      WEBHOOK_URL = url;
-      localStorage.setItem("almualij_webhook_url", url);
-      return true;
-    }
-    return false;
-  },
-  getWebhookUrl: () => WEBHOOK_URL
+  navigateTo: navigateToScreen
 };
