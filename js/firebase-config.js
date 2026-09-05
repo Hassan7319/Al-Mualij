@@ -154,21 +154,22 @@ const PatientService = {
    * Fetch appointment history for patient
    */
   async getPatientAppointments(patientId) {
-    if (firebaseDb && isFirebaseConfigured()) {
-      try {
-        const snapshot = await firebaseDb.collection("appointments")
-          .where("patientId", "==", patientId)
-          .orderBy("createdAt", "desc")
-          .get();
-        const records = [];
-        snapshot.forEach(doc => records.push({ id: doc.id, ...doc.data() }));
-        return records;
-      } catch (err) {
-        console.warn("Firestore read failed, returning local records:", err);
-        return LocalStore.getAppointments(patientId);
-      }
+    if (!firebaseDb || !isFirebaseConfigured() || !patientId) {
+      return [];
     }
-    return LocalStore.getAppointments(patientId);
+
+    try {
+      const snapshot = await firebaseDb.collection("appointments")
+        .where("patientId", "==", patientId)
+        .orderBy("createdAt", "desc")
+        .get();
+      const records = [];
+      snapshot.forEach(doc => records.push({ id: doc.id, ...doc.data() }));
+      return records;
+    } catch (err) {
+      console.warn("Firestore appointment read failed:", err);
+      return [];
+    }
   }
 };
 

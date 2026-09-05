@@ -5,6 +5,8 @@
    ========================================================================== */
 
 // 16 Form Fields Schema
+const N8N_PRODUCTION_WEBHOOK_URL = "https://white7319.app.n8n.cloud/webhook/bec6264f-d14f-4efb-ba09-5a06a06f202f";
+
 const INPUT_FIELDS_JSON = [
   { "id": "mrNumber", "label": "MR #", "type": "text", "required": true },
   { "id": "patientName", "label": "Name", "type": "text", "required": true },
@@ -47,7 +49,7 @@ function initApp() {
     window.AlMualijFirebase.init();
   }
 
-  // 2. Load stored active user, appointments, and credentials
+  // 2. Load the stored active user session
   loadSavedState();
 
   // 3. Set minimum date for appointment picker to today
@@ -75,7 +77,6 @@ function initApp() {
 function loadSavedState() {
   if (window.AlMualijFirebase && window.AlMualijFirebase.localStore) {
     AppState.activeUser = window.AlMualijFirebase.localStore.getCurrentUser();
-    AppState.appointments = window.AlMualijFirebase.localStore.getAppointments();
   }
 
   // Sync Firebase Auth current user if already signed in
@@ -751,7 +752,7 @@ function getRegisteredAccount(email) {
 /* ==========================================================================
    SCREEN 3: PATIENT DASHBOARD / RECORD VIEW
    ========================================================================== */
-function renderDashboard() {
+async function renderDashboard() {
   const patientWelcomeName = document.getElementById("dashboardPatientName");
   const recordContainer = document.getElementById("dashboardRecordArea");
   const emptyStateCard = document.getElementById("dashboardEmptyState");
@@ -763,9 +764,11 @@ function renderDashboard() {
       : "Esteemed Patient";
   }
 
-  // Fetch updated appointments list
-  if (window.AlMualijFirebase && window.AlMualijFirebase.localStore) {
-    AppState.appointments = window.AlMualijFirebase.localStore.getAppointments();
+  // Always read appointment history from Firestore so it follows the patient across devices.
+  if (AppState.activeUser && window.AlMualijFirebase && window.AlMualijFirebase.patientService) {
+    AppState.appointments = await window.AlMualijFirebase.patientService.getPatientAppointments(AppState.activeUser.id);
+  } else {
+    AppState.appointments = [];
   }
 
   if (!AppState.appointments || AppState.appointments.length === 0) {
@@ -1118,6 +1121,20 @@ function setupAppointmentFormListeners() {
     `;
 
     try {
+      // Temporary direct webhook delivery for the presentation demo.
+      try {
+        await fetch(N8N_PRODUCTION_WEBHOOK_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(appointmentPayload)
+        });
+      } catch (webhookError) {
+        console.warn("Production webhook delivery notice:", webhookError);
+      }
+
       // Save record to Firebase Firestore or fallback local store.
       let firestoreResult = { success: true };
       if (window.AlMualijFirebase && window.AlMualijFirebase.patientService) {
