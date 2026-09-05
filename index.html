@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Al-Mualij - Traditional Herbal (Unani) Health Clinic Patient Portal. Schedule holistic consultations, view patient records, and experience personalized Unani medicine." />
+  <meta name="description" content="Al-Mualij - Traditional Herbal (Unani) Health Clinic Patient Portal. Record completed consultations, review patient histories, and get appointment help from the virtual receptionist." />
   <meta name="theme-color" content="#1B4332" />
   <title>Al-Mualij | Traditional Herbal (Unani) Health Clinic & Patient Portal</title>
 
@@ -233,17 +233,81 @@
         <div class="dashboard-banner">
           <div class="banner-content">
             <h2>Peace & Wellness, <span id="dashboardPatientName">Patient</span></h2>
-            <p>Welcome to your personal Al-Mualij health portal. Manage your holistic consultations, track appointments, and review your herbal wellness plan.</p>
+            <p>Welcome to your personal Al-Mualij health portal. Review completed consultation records, access patient histories, and manage holistic herbal wellness plans.</p>
           </div>
           <div>
             <!-- Primary Action Item: Navigates directly to Screen 4 -->
             <button id="dashboardBookBtn" class="btn btn-primary btn-lg" style="background: #ffffff; color: var(--color-primary-dark); box-shadow: var(--shadow-sm);" type="button">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="12" y1="18" x2="12" y2="12"></line>
+                <line x1="9" y1="15" x2="15" y2="15"></line>
               </svg>
-              <span>Schedule an Appointment</span>
+              <span>Record Completed Appointment</span>
             </button>
+          </div>
+        </div>
+
+        <!-- Appointment Chatbot Assistant Guide Card -->
+        <div class="chatbot-guide-card">
+          <div class="chatbot-guide-header">
+            <div class="guide-badge-wrap">
+              <span class="badge badge-unani">
+                <span class="badge-pulse-dot"></span>
+                <span>Virtual Clinic Receptionist</span>
+              </span>
+              <span class="chatbot-avail-pill">24/7 Live AI Assistant</span>
+            </div>
+          </div>
+          <div class="chatbot-guide-body">
+            <div class="chatbot-guide-icon-box">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                <circle cx="9" cy="10" r="1"></circle>
+                <circle cx="15" cy="10" r="1"></circle>
+                <path d="M9.5 14c1 .67 2 .67 3 0"></path>
+              </svg>
+            </div>
+            <div class="chatbot-guide-info">
+              <h3>Need to Schedule, Change, or Cancel an Appointment?</h3>
+              <p>
+                For a new appointment, a schedule change, or a cancellation, use the <strong>Al-Mualij Chatbot Assistant</strong>. It will guide you to the right next step.
+              </p>
+
+              <div class="chatbot-guide-features">
+                <div class="chatbot-feature-item">
+                    <span class="feature-icon" aria-hidden="true">01</span>
+                  <div>
+                    <strong>Schedule Appointment</strong>
+                    <span>Book a new herbal consultation</span>
+                  </div>
+                </div>
+                <div class="chatbot-feature-item">
+                    <span class="feature-icon" aria-hidden="true">02</span>
+                  <div>
+                    <strong>Reschedule / Change</strong>
+                    <span>Change your appointment timing</span>
+                  </div>
+                </div>
+                <div class="chatbot-feature-item">
+                    <span class="feature-icon" aria-hidden="true">03</span>
+                  <div>
+                    <strong>Cancel Booking</strong>
+                    <span>Cancel an existing appointment</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chatbot-guide-cta-row">
+                <button id="dashboardOpenChatbotBtn" class="btn btn-bot-cta" type="button">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                  </svg>
+                  <span>Open appointment assistant</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -284,7 +348,7 @@
           <div class="section-top-bar">
             <div>
               <h3 style="font-family: var(--font-serif); font-size: 1.6rem;">Your Patient Record & Consultations</h3>
-              <p style="font-size: 0.88rem; color: var(--text-secondary);">Verified consultation history with Al-Mualij Hakims</p>
+              <p style="font-size: 0.88rem; color: var(--text-secondary);">Archive of completed clinical visits and Unani treatment histories</p>
             </div>
           </div>
 
@@ -298,10 +362,10 @@
                 <line x1="3" y1="2" x2="21" y2="10"/>
               </svg>
             </div>
-            <h3>No patient profile or history found</h3>
-            <p>You have not scheduled any Unani herbal consultations yet. Take the first step toward natural healing and schedule your personalized assessment with our clinical practitioners.</p>
+            <h3>No completed consultation records found</h3>
+            <p>You have not logged any completed consultation records yet. After a visit, use the Appointment Form below to archive the patient details and clinical summary. For a future appointment, use the appointment assistant.</p>
             <button class="btn btn-primary" onclick="window.AlMualijApp.navigateTo(4)" type="button">
-              Book Your First Appointment
+              Record Completed Appointment
             </button>
           </div>
 
@@ -324,10 +388,43 @@
           <div class="form-header">
             <div class="form-header-badge">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Clinical Intake Record</span>
+              <span>Completed Consultation Record</span>
             </div>
-            <h2>Patient Consultation & Clinical Entry</h2>
-            <p>Please enter complete clinical intake information below. All 17 fields are verified and recorded securely.</p>
+            <h2>Appointment Form</h2>
+            <p>Complete this form after the consultation has finished to archive patient details, clinical notes, treatment, and billing information for future reference.</p>
+          </div>
+
+          <!-- Chatbot Guidance & Redirection Banner -->
+          <div class="appointment-guide-banner">
+            <div class="guide-banner-icon-col">
+              <div class="guide-banner-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  <circle cx="9" cy="10" r="1"></circle>
+                  <circle cx="15" cy="10" r="1"></circle>
+                  <path d="M9.5 14c1 .67 2 .67 3 0"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="guide-banner-text-col">
+              <div class="guide-banner-heading">
+                Need help with a future appointment?
+              </div>
+              <p class="guide-banner-desc">
+                <strong>Important Notice:</strong> This <strong>Appointment Form</strong> is exclusively for archiving patient information <strong>after an appointment has already taken place</strong> (for reference, billing records, and clinical history).
+              </p>
+              <p class="guide-banner-desc" style="margin-top: 0.3rem;">
+                To <strong>schedule</strong>, <strong>change</strong>, or <strong>cancel</strong> an upcoming appointment, leave this record form and use the <strong>Al-Mualij Chatbot Assistant</strong>. The assistant will guide you through that request.
+              </p>
+              <div class="guide-banner-actions">
+                <button id="formChatbotRedirectBtn" class="btn btn-bot-inline" type="button">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                  </svg>
+                  <span>Open appointment assistant</span>
+                </button>
+              </div>
+            </div>
           </div>
 
           <!-- The Appointment Form with all 17 fields -->
@@ -444,7 +541,7 @@
               <label class="form-label" for="diagnosis">
                 10. Diagnosis <span class="required-star">*</span>
               </label>
-              <textarea id="diagnosis" class="form-control clinical-textarea" rows="4" placeholder="Enter clinical diagnosis, humoral (Mizaj) observations, and symptoms (no limit)..." required></textarea>
+              <textarea id="diagnosis" class="form-control clinical-textarea" rows="4" placeholder="Enter confirmed clinical diagnosis, humoral (Mizaj) observations, and symptoms noted during consultation..." required></textarea>
               <div class="form-error-msg">Diagnosis details are required.</div>
             </div>
 
@@ -453,7 +550,7 @@
               <label class="form-label" for="treatment">
                 11. Treatment <span class="required-star">*</span>
               </label>
-              <textarea id="treatment" class="form-control clinical-textarea" rows="4" placeholder="Enter prescribed treatment, herbal formulas, diet regimen, and lifestyle guidance (no limit)..." required></textarea>
+              <textarea id="treatment" class="form-control clinical-textarea" rows="4" placeholder="Enter prescribed herbal formulas, dosage regimen, dietary guidance, and lifestyle instructions provided to the patient..." required></textarea>
               <div class="form-error-msg">Treatment details are required.</div>
             </div>
 
@@ -502,29 +599,30 @@
               </div>
             </div>
 
-            <!-- SECTION D: Scheduling & Entry Metadata -->
+            <!-- SECTION D: Completed Consultation Date & Entry Details -->
             <div class="form-section-divider">
               <div class="form-section-title">
                 <span class="section-number-pill">D</span>
-                <span>Consultation Date & Entry Details</span>
+                <span>Completed Consultation Date & Entry Details</span>
               </div>
             </div>
 
-            <!-- Date Picker for Schedule -->
+            <!-- Date Picker for Completed Consultation -->
             <div class="form-group">
               <label class="form-label" for="appointmentDate">
-                Consultation Date <span class="required-star">*</span>
+                Date of Completed Consultation <span class="required-star">*</span>
               </label>
               <input type="date" id="appointmentDate" class="form-control" required style="max-width: 280px;" />
               <div class="form-error-msg">Please select an appointment date.</div>
+              <small class="helper-text" style="display: block; margin-top: 0.35rem; color: var(--text-muted); font-size: 0.8rem;">Date when this consultation took place (today or past date).</small>
             </div>
 
             <!-- Field 16: Entered by -->
             <div class="form-group">
               <label class="form-label" for="enteredBy">
-                16. Entered by <span class="required-star">*</span>
+                16. Recorded / Entered by <span class="required-star">*</span>
               </label>
-              <input type="text" id="enteredBy" class="form-control" placeholder="Name of person entering data" required />
+              <input type="text" id="enteredBy" class="form-control" placeholder="Name of staff member or Hakim entering this record" required />
               <div class="form-error-msg">Please specify who entered this record.</div>
             </div>
 
@@ -532,7 +630,7 @@
             <div class="form-actions-bar">
               <button type="submit" id="submitAppointmentBtn" class="btn btn-primary btn-lg" style="flex: 2; min-width: 220px;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Save & Submit Patient Record</span>
+                <span>Save & Archive Completed Record</span>
               </button>
               <button type="button" id="backToDashboardBtn" class="btn btn-secondary btn-lg" style="flex: 1;">
                 Cancel
@@ -557,8 +655,8 @@
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
       </div>
-      <h3 id="modalTitle">Appointment Request Submitted!</h3>
-      <p>Your appointment request has been submitted successfully. A Unani consultant will review your consultation request and contact you shortly.</p>
+      <h3 id="modalTitle">Appointment Record Saved!</h3>
+      <p id="modalDesc">The completed appointment details and clinical summary have been securely recorded into the patient's file for future reference.</p>
       
       <div id="modalAppointmentSummary" class="modal-details-summary"></div>
 
@@ -566,6 +664,101 @@
         Return to Patient Dashboard
       </button>
     </div>
+  </div>
+
+  <!-- ====================================================================
+       CHATBOT GUIDANCE & INTERACTIVE PREVIEW MODAL
+       ==================================================================== -->
+  <div id="chatbotModalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="chatbotModalTitle">
+    <div class="modal-card chatbot-modal-card">
+      <div class="chatbot-modal-header">
+        <div class="chatbot-modal-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            <circle cx="9" cy="10" r="1"></circle>
+            <circle cx="15" cy="10" r="1"></circle>
+            <path d="M9.5 14c1 .67 2 .67 3 0"></path>
+          </svg>
+        </div>
+        <div>
+          <h3 id="chatbotModalTitle" style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--color-primary-dark); margin-bottom: 0.2rem;">Al-Mualij Appointment Assistant</h3>
+          <span class="badge badge-unani">Virtual Receptionist</span>
+        </div>
+      </div>
+
+      <div class="chatbot-modal-body">
+        <p style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 1.25rem;">
+          Our AI Chatbot manages all live appointment scheduling needs seamlessly. How can we assist you today?
+        </p>
+
+        <div class="chatbot-modal-options">
+          <div class="chatbot-opt-card" id="chatOptSchedule">
+            <div class="opt-icon">📅</div>
+            <div class="opt-info">
+              <strong>Schedule a New Appointment</strong>
+              <p>Choose your preferred Hakim, consultation date, and timeslot.</p>
+            </div>
+            <span class="opt-arrow">→</span>
+          </div>
+
+          <div class="chatbot-opt-card" id="chatOptReschedule">
+            <div class="opt-icon">🔄</div>
+            <div class="opt-info">
+              <strong>Change / Reschedule Appointment</strong>
+              <p>Update or change your existing appointment to a new date.</p>
+            </div>
+            <span class="opt-arrow">→</span>
+          </div>
+
+          <div class="chatbot-opt-card" id="chatOptCancel">
+            <div class="opt-icon">❌</div>
+            <div class="opt-info">
+              <strong>Cancel an Appointment</strong>
+              <p>Easily release your slot or cancel an upcoming consultation.</p>
+            </div>
+            <span class="opt-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="chatbot-status-box">
+          <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink: 0; margin-top: 2px; color: var(--color-primary);">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <div style="font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary);">
+              <strong>Botpress appointment assistant:</strong> Use the floating chat button to schedule, change, or cancel an upcoming appointment.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions" style="margin-top: 1.5rem;">
+        <button id="closeChatbotModalBtn" class="btn btn-primary btn-block btn-lg" type="button">
+          Close Assistant Guide
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       FLOATING CHATBOT LAUNCHER WIDGET
+       ==================================================================== -->
+  <div id="chatbotFloatingWidget" class="chatbot-floating-widget">
+    <div class="chatbot-floating-tooltip">
+          <strong>Appointment help</strong>
+          <span>Schedule, change, or cancel with the assistant</span>
+    </div>
+    <button id="chatbotFloatingBtn" class="chatbot-floating-btn" type="button" aria-label="Open Al-Mualij Appointment Chatbot" title="Schedule, Change, or Cancel Appointments">
+      <span class="bot-floating-pulse"></span>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        <circle cx="9" cy="10" r="1"></circle>
+        <circle cx="15" cy="10" r="1"></circle>
+        <path d="M9.5 14c1 .67 2 .67 3 0"></path>
+      </svg>
+    </button>
   </div>
 
   <!-- Toast Notification Container -->
@@ -602,6 +795,10 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Botpress Cloud appointment assistant -->
+  <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2026/09/04/09/20260904092711-IUX057TD.js" defer></script>
 
   <!-- Application Logic & Firebase Config Scripts -->
   <script src="js/firebase-config.js"></script>

@@ -60,6 +60,7 @@ function initApp() {
   setupNavigationListeners();
   setupAuthListeners();
   setupAppointmentFormListeners();
+  setupChatbotGuide();
   setupDevDrawer();
 
   // 5. Initialize Cooldown state if any
@@ -270,6 +271,50 @@ function setupNavigationListeners() {
       handleSignOut();
     });
   }
+}
+
+function setupChatbotGuide() {
+  const modal = document.getElementById("chatbotModalOverlay");
+  const openButtons = [
+    document.getElementById("dashboardOpenChatbotBtn"),
+    document.getElementById("formChatbotRedirectBtn"),
+    document.getElementById("chatbotFloatingBtn")
+  ].filter(Boolean);
+  const closeButton = document.getElementById("closeChatbotModalBtn");
+
+  const openBotpressChat = () => {
+    if (window.botpress && typeof window.botpress.open === "function") {
+      window.botpress.open();
+      return;
+    }
+
+    showToast("The appointment assistant is still loading. Please try again shortly.", "info");
+  };
+
+  if (!modal && openButtons.length === 0) return;
+
+  const closeGuide = () => {
+    modal.classList.remove("active");
+    document.body.classList.remove("body-unscrollable");
+  };
+
+  openButtons.forEach(button => {
+    button.addEventListener("click", openBotpressChat);
+  });
+
+  if (modal) {
+    if (closeButton) closeButton.addEventListener("click", closeGuide);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeGuide();
+    });
+  }
+
+  ["chatOptSchedule", "chatOptReschedule", "chatOptCancel"].forEach(optionId => {
+    const option = document.getElementById(optionId);
+    if (option) {
+      option.addEventListener("click", openBotpressChat);
+    }
+  });
 }
 
 function handleSignOut() {
